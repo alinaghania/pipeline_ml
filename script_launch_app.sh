@@ -43,4 +43,4 @@ pip install -r "$REQUIREMENTS_PATH" || { echo "Pip install failed, exiting..."; 
 
 # Lance l'application Flask
 export FLASK_APP="$FLASK_APP_PATH"
-flask run --host='0.0.0.0' --port=8081
+nohup flask run --host='0.0.0.0' --port=8081
