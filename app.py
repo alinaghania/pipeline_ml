@@ -1,34 +1,14 @@
-
-"""
-simple python flask application
-""" 
-
-##########################################################################
-## Imports
-##########################################################################
-  
-import os
- 
-from flask import Flask
+from flask import Flask, render_template
+from app_routes import deployment_blueprint, testing_blueprint
 from flask import request
-from flask import render_template
-from flask import url_for
 from flask.json import jsonify
-from flask import request
-import logging
-import subprocess 
 
-
-
-##########################################################################
-## Application Setup
-##########################################################################
 
 app = Flask(__name__)
 
-##########################################################################
-## Routes
-##########################################################################
+# Register blueprints with prefixes to avoid route conflicts
+app.register_blueprint(deployment_blueprint, url_prefix='/deployment')
+app.register_blueprint(testing_blueprint, url_prefix='/testing')
 
 @app.route("/")
 def home():
@@ -70,51 +50,5 @@ def whoami_name(name):
         useragent=request.user_agent.string
     )
 
-#
-@app.route("/testing", methods=['POST'])
-def testing():
-    # Extract the JSON payload
-    payload = request.get_json()
-    print(f"Received payload: {payload}")  # Log the received payload
-
-    # Extract the branch name from the payload
-    branch_name = payload.get('ref', '')
-    print(f"Extracted branch name: {branch_name}")  # Log the extracted branch name
-
-    if branch_name == 'refs/heads/staging':
-        os.system('git pull origin staging')
-        return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
-    
-    return jsonify({'success': False}), 400, {'ContentType': 'application/json'} 
-
-
-@app.route("/deployment", methods=['POST'])
-def deployment():
-    # Extract the JSON payload
-    payload = request.get_json()
-    print(f"Received payload: {payload}")  # Log the received payload
-
-    # Extract the branch name from the payload
-    branch_name = payload.get('ref', '')
-    print(f"Extracted branch name: {branch_name}")  # Log the extracted branch name
-
-    if branch_name == 'refs/heads/main':
-        try:
-            subprocess.check_output(['git', 'pull', 'origin', 'main'])
-        except subprocess.CalledProcessError as e:
-            print(f"Error pulling from main: {e.output}")
-        return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
-    
-    return jsonify({'success': False}), 400, {'ContentType': 'application/json'}
-
-
-
-
-
-##########################################################################
-## Main
-##########################################################################
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
-    
