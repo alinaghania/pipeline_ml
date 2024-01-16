@@ -5,8 +5,8 @@ deployment_blueprint = Blueprint('deployment', __name__)
 testing_blueprint = Blueprint('testing', __name__)
 
 # Path to your scripts
-PATH_TO_TEST_SCRIPT = '/Users/alina/vs-project/project/pipeline_ml/script_launch_app.sh'
-PATH_TO_LAUNCH_SCRIPT = '/Users/alina/vs-project/project/pipeline_ml/script_run_test.sh'
+PATH_TO_TEST_SCRIPT = '/Users/alina/vs-project/project/pipeline_ml/script_run_test.sh'
+PATH_TO_LAUNCH_SCRIPT = '/Users/alina/vs-project/project/pipeline_ml/script_launch_app.sh'
 
 @testing_blueprint.route("", methods=['POST'])
 def testing():
