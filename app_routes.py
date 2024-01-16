@@ -8,7 +8,7 @@ testing_blueprint = Blueprint('testing', __name__)
 PATH_TO_TEST_SCRIPT = '/Users/alina/vs-project/project/pipeline_ml/script_launch_app.sh'
 PATH_TO_LAUNCH_SCRIPT = '/Users/alina/vs-project/project/pipeline_ml/script_run_test.sh'
 
-@testing_blueprint.route("/", methods=['POST'])
+@testing_blueprint.route("", methods=['POST'])
 def testing():
     try:
         # Run the test script
@@ -17,7 +17,7 @@ def testing():
     except subprocess.CalledProcessError as e:
         return jsonify({'success': False, 'message': str(e)}), 500
 
-@deployment_blueprint.route("/", methods=['POST'])
+@deployment_blueprint.route("", methods=['POST'])
 def deployment():
     try:
         # Run the deployment script
