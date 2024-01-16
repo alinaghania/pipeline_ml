@@ -70,18 +70,20 @@ def whoami_name(name):
     )
 @app.route("/testing", methods=['POST'])
 def testing():
-    pushed_data = request.get_json()  # get the pushed_data from the post request, 
-    branch_name = pushed_data.get('ref', '')  # extract the branch name from the pushed data
+    # Extract the branch name from the form data
+    branch_name = request.form.get('ref', '')
+
     if branch_name == 'refs/heads/staging':  # We test on the staging branch 
         os.system('git pull origin staging') # pull the latest changes from the remote repository 
         return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
     
     return jsonify({'success': False}), 400, {'ContentType': 'application/json'} 
     
-@app.route("/deployment", methods =['POST'])
+@app.route("/deployment", methods=['POST'])
 def deployment():
-    pushed_data = request.get_json()
-    branch_name = pushed_data.get('ref','')
+    # Extract the branch name from the form data
+    branch_name = request.form.get('ref', '')
+
     if branch_name == 'refs/heads/main':
         os.system('git pull origin main')
         return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
@@ -92,10 +94,10 @@ def deployment():
 
 
 
-
 ##########################################################################
 ## Main
 ##########################################################################
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=8080, debug=True)
+    
