@@ -2,63 +2,12 @@
 + cd /Users/alina/vs-project/project/pipeline_ml
 + export FLASK_APP=app.py
 + FLASK_APP=app.py
++ git config pull.rebase false
 + git pull origin main
-From https://github.com/alinaghania/pipeline_ml
- * branch            main       -> FETCH_HEAD
-hint: You have divergent branches and need to specify how to reconcile them.
-hint: You can do so by running one of the following commands sometime before
-hint: your next pull:
-hint: 
-hint:   git config pull.rebase false  # merge
-hint:   git config pull.rebase true   # rebase
-hint:   git config pull.ff only       # fast-forward only
-hint: 
-hint: You can replace "git config" with "git config --global" to set a default
-hint: preference for all repositories. You can also pass --rebase, --no-rebase,
-hint: or --ff-only on the command line to override the configured default per
-hint: invocation.
-fatal: Need to specify how to reconcile divergent branches.
-+ pip install -r requirements.txt
-
-[notice] A new release of pip is available: 23.3.1 -> 23.3.2
-[notice] To update, run: pip install --upgrade pip
-+ flask run --host=0.0.0.0 --port=8081
-Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.11/bin/flask", line 8, in <module>
-    sys.exit(main())
-             ^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/cli.py", line 1064, in main
-    cli.main()
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/click/core.py", line 1078, in main
-    rv = self.invoke(ctx)
-         ^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
-    return _process_result(sub_ctx.command.invoke(sub_ctx))
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
-    return ctx.invoke(self.callback, **ctx.params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/click/core.py", line 783, in invoke
-    return __callback(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/click/decorators.py", line 92, in new_func
-    return ctx.invoke(f, obj, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/click/core.py", line 783, in invoke
-    return __callback(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/cli.py", line 924, in run_command
-    run_simple(
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/werkzeug/serving.py", line 1077, in run_simple
-    srv = make_server(
-          ^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/werkzeug/serving.py", line 917, in make_server
-    return ThreadedWSGIServer(
-           ^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/werkzeug/serving.py", line 779, in __init__
-    self.socket = socket.fromfd(fd, address_family, socket.SOCK_STREAM)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/socket.py", line 546, in fromfd
-    nfd = dup(fd)
-          ^^^^^^^
-OSError: [Errno 9] Bad file descriptor
+error: Pulling is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
++ '[' 128 -ne 0 ']'
++ echo 'Git pull failed, exiting...'
++ exit 1
