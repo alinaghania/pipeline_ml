@@ -8,7 +8,7 @@ testing_blueprint = Blueprint('testing', __name__)
 PATH_TO_TEST_SCRIPT = '/Users/alina/vs-project/project/pipeline_ml/script_run_test.sh'
 PATH_TO_LAUNCH_SCRIPT = '/Users/alina/vs-project/project/pipeline_ml/script_launch_app.sh'
 
-@deployment_blueprint.route("", methods=['POST'])
+@deployment_blueprint.route("/", methods=['POST'])
 def deployment():
     try:
         # Extract the branch name from the payload
@@ -25,7 +25,7 @@ def deployment():
     except subprocess.CalledProcessError as e:
         return jsonify({'success': False, 'message': str(e)}), 500
 
-@testing_blueprint.route("", methods=['POST'])
+@testing_blueprint.route("/", methods=['POST'])
 def testing():
     try:
         # Extract the branch name from the payload
