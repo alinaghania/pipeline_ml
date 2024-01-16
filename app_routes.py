@@ -18,7 +18,7 @@ def deployment():
         # Check if the push was to the main branch
         if branch_name == "main":
             # Run the deployment script
-            subprocess.run([PATH_TO_LAUNCH_SCRIPT], check=True)
+            subprocess.run([PATH_TO_LAUNCH_SCRIPT,branch_name], check=True)
             return jsonify({'success': True, 'message': 'Deployment started.'}), 200
         else:
             return jsonify({'success': False, 'message': 'Deployment skipped for non-main branch.'}), 200
@@ -35,7 +35,7 @@ def testing():
         # Check if the push was to the staging branch
         if branch_name == "staging":
             # Run the testing script
-            subprocess.run([PATH_TO_TEST_SCRIPT], check=True)
+            subprocess.run([PATH_TO_TEST_SCRIPT,branch_name], check=True)
             return jsonify({'success': True, 'message': 'Testing started.'}), 200
         else:
             return jsonify({'success': False, 'message': 'Testing skipped for non-staging branch.'}), 200
