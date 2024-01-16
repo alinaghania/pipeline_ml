@@ -14,6 +14,8 @@ from flask import request
 from flask import render_template
 from flask import url_for
 from flask.json import jsonify
+from flask import request
+import logging
 
 
 
@@ -66,6 +68,30 @@ def whoami_name(name):
         ip=request.remote_addr,
         useragent=request.user_agent.string
     )
+@app.route("/testing", methods=['POST'])
+def testing():
+    pushed_data = request.get_json()  # get the pushed_data from the post request, 
+    branch_name = pushed_data.get('ref', '')  # extract the branch name from the pushed data
+    if branch_name == 'refs/heads/staging':  # We test on the staging branch 
+        os.system('git pull origin staging') # pull the latest changes from the remote repository 
+        return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
+    
+    return jsonify({'success': False}), 400, {'ContentType': 'application/json'} 
+    
+@app.route("/deployment", methods =['POST'])
+def deployment():
+    pushed_data = request.get_json()
+    branch_name = pushed_data.get('ref','')
+    if branch_name == 'refs/heads/main':
+        os.system('git pull origin main')
+        return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
+    
+    return jsonify({'success': False}), 400, {'ContentType': 'application/json'}
+
+
+
+
+
 
 ##########################################################################
 ## Main
