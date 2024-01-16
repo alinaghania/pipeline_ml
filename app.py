@@ -16,6 +16,7 @@ from flask import url_for
 from flask.json import jsonify
 from flask import request
 import logging
+import subprocess 
 
 
 
@@ -86,6 +87,7 @@ def testing():
     
     return jsonify({'success': False}), 400, {'ContentType': 'application/json'} 
 
+
 @app.route("/deployment", methods=['POST'])
 def deployment():
     # Extract the JSON payload
@@ -97,7 +99,10 @@ def deployment():
     print(f"Extracted branch name: {branch_name}")  # Log the extracted branch name
 
     if branch_name == 'refs/heads/main':
-        os.system('git pull origin main')
+        try:
+            subprocess.check_output(['git', 'pull', 'origin', 'main'])
+        except subprocess.CalledProcessError as e:
+            print(f"Error pulling from main: {e.output}")
         return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
     
     return jsonify({'success': False}), 400, {'ContentType': 'application/json'}
