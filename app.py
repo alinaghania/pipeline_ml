@@ -72,19 +72,21 @@ def whoami_name(name):
 #
 @app.route("/testing", methods=['POST'])
 def testing():
-    # Extract the branch name from the form data
-    branch_name = request.form.get('ref', '')
+    # Extract the branch name from the JSON payload
+    payload = request.get_json()
+    branch_name = payload.get('ref', '')
 
-    if branch_name == 'refs/heads/staging':  # We test on the staging branch 
-        os.system('git pull origin staging') # pull the latest changes from the remote repository 
+    if branch_name == 'refs/heads/staging':
+        os.system('git pull origin staging')
         return jsonify({'success': True}), 200, {'ContentType': 'application/json'}
     
     return jsonify({'success': False}), 400, {'ContentType': 'application/json'} 
     
 @app.route("/deployment", methods=['POST'])
 def deployment():
-    # Extract the branch name from the form data
-    branch_name = request.form.get('ref', '')
+    # Extract the branch name from the JSON payload
+    payload = request.get_json()
+    branch_name = payload.get('ref', '')
 
     if branch_name == 'refs/heads/main':
         os.system('git pull origin main')
