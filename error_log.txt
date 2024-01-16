@@ -1,0 +1,33 @@
+++ dirname ./script_launch_app.sh
++ cd .
++ export FLASK_APP=app.py
++ FLASK_APP=app.py
++ git config pull.rebase false
++ git pull origin main
+From https://github.com/alinaghania/pipeline_ml
+ * branch            main       -> FETCH_HEAD
++ '[' 0 -ne 0 ']'
++ pip install -r requirements.txt
+
+[notice] A new release of pip is available: 23.3.1 -> 23.3.2
+[notice] To update, run: pip install --upgrade pip
++ command -v flask
++ flask run --host=0.0.0.0 --port=8081
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8081
+ * Running on http://10.188.233.214:8081
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [16/Jan/2024 23:16:16] "GET / HTTP/1.1" 200 -
++ e
+./script_launch_app.sh: line 39: e: command not found
++ cd ''
++ git config pull.rebase false
++ git pull origin main
+From https://github.com/alinaghania/pipeline_ml
+ * branch            main       -> FETCH_HEAD
++ pip install --upgrade pip
++ pip install -r ''
+ERROR: Could not open requirements file: [Errno 2] No such file or directory: ''
++ echo 'Pip install failed, exiting...'
++ exit 1
