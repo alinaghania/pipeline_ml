@@ -27,6 +27,8 @@ pip install -r requirements.txt
 # Définir le chemin vers l'application Flask
 export FLASK_APP="${FLASK_APP_PATH}"
 
+kill $(lsof -ti :8081)
+
 # Démarrer l'application Flask en arrière-plan
 nohup flask run --host=0.0.0.0 --port=8081 > "${STDOUT_LOG}" 2> "${STDERR_LOG}" &
 
